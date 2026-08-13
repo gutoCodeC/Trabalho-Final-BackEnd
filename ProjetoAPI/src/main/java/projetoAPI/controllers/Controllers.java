@@ -1,4 +1,4 @@
-package Ana.Clara.ProjetoAPI.controllers;
+package projetoAPI.controllers;
 
 	import java.util.List;
 
@@ -11,8 +11,8 @@ package Ana.Clara.ProjetoAPI.controllers;
 	import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RestController;
 
-import Ana.Clara.ProjetoAPI.entities.Usuario;
-import Ana.Clara.ProjetoAPI.services.Services;
+import projetoAPI.entities.Usuario;
+import projetoAPI.services.Services;
 
 
 
