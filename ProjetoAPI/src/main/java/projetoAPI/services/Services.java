@@ -79,4 +79,4 @@ public class ProdutoService {
         produto.setQuantidade(produto.getQuantidade() - quantidadeSaida);
         return produtoRepository.save(produto);
     }
-} 
+}
