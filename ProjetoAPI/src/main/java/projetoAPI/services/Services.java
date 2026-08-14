@@ -1,67 +1,82 @@
 package projetoAPI.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.stereotype.Service;
+public class ProdutoService {
 
-import projetoAPI.entities.Usuario;
-import projetoAPI.repositories.Repositories;
+    private final ProdutoRepository produtoRepository;
 
-@Service
-public class Services {
-	private final Repositories repository;
+    public ProdutoService(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
 
-	public Services (Repositories repository) {
-		this.repository = repository;
-	}
-	
-	// Método para salvar um usuário no banco de dados
-	
-	public String SalvarUsuario	(Usuario usuario) {
-		repository.save(usuario);
-		return "Usuário cadastrado com sucesso!";
-	}
-	
-	// Método para localizar um usuário pelo ID
-	
-	public Usuario buscaId(Long id) {
-		return repository.findById(id).orElseThrow(
-				() -> new RuntimeException ("Usuário não encontrado"));
-		}
-	
-	// Método para localizar um usuário pelo Email
-	
-	public Usuario buscaEmail(String email) {
-		return repository.findByEmail(email).orElseThrow(
-				() -> new RuntimeException ("Usuário não encontrado"));
-	}
+    public Produto cadastrar(Produto produto) {
+        if (produto.getNome() == null || produto.getNome().trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome do produto é obrigatório.");
+        }
+        if (produto.getPreco() == null || produto.getPreco() < 0) {
+            throw new IllegalArgumentException("O preço do produto não pode ser negativo.");
+        }
+        if (produto.getQuantidade() == null || produto.getQuantidade() < 0) {
+            throw new IllegalArgumentException("A quantidade inicial de estoque não pode ser negativa.");
+        }
 
-	// Método para localizar todos os usuários
-	public List<Usuario> procurarTodos() {
-		return repository.findAll();
-	}
-	
-	// Método para deletar um usuário pelo Id
-	public String deletarPorId (Long id){
-		repository.deleteById(id);
-		return "Usuário deletado com sucesso";
-	}
-	
-	// Método para deletar um usuário pelo email
-		public String deletarPorEmail (String email) {
-			repository.deleteByEmail(email);
-			return "Usuário deletado com sucesso";
-		}
-		
-		public String editarUsuario (Long id, Usuario usuario) {
-			Usuario response = repository.findById(id).get();
-			
-			response.setNome(usuario.getNome());
-			response.setEmail(usuario.getEmail());
-			response.setSenha(usuario.getSenha());
-			
-			repository.save(response);
-			return "Usuário editado com sucesso!!!";
-		}
-		
-	}
+        return produtoRepository.save(produto);
+    }
+
+    public List<Produto> listarTodos() {
+        return produtoRepository.findAll();
+    }
+
+    public Produto buscarPorId(Long id) {
+        return produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto com ID " + id + " não encontrado."));
+    }
+
+    public Produto atualizarCadastro(Long id, Produto dadosAtualizados) {
+        Produto produtoExistente = buscarPorId(id);
+
+        produtoExistente.setNome(dadosAtualizados.getNome());
+        produtoExistente.setPreco(dadosAtualizados.getPreco());
+        produtoExistente.setDescricao(dadosAtualizados.getDescricao());
+
+        return produtoRepository.save(produtoExistente);
+    }
+
+    public void deletar(Long id) {
+        Produto produto = buscarPorId(id);
+        
+        if (produto.getQuantidade() > 0) {
+            throw new IllegalStateException("Não é possível deletar um produto com saldo em estoque. Zere o estoque antes.");
+        }
+
+        produtoRepository.deleteById(id);
+    }
+
+    public Produto adicionarEstoque(Long id, Double quantidadeEntrada) {
+        if (quantidadeEntrada == null || quantidadeEntrada <= 0) {
+            throw new IllegalArgumentException("A quantidade de entrada deve ser maior que zero.");
+        }
+
+        Produto produto = buscarPorId(id);
+        produto.setQuantidade(produto.getQuantidade() + quantidadeEntrada);
+
+        return produtoRepository.save(produto);
+    }
+
+    public Produto removerEstoque(Long id, Double quantidadeSaida) {
+        if (quantidadeSaida == null || quantidadeSaida <= 0) {
+            throw new IllegalArgumentException("A quantidade de saída deve ser maior que zero.");
+        }
+
+        Produto produto = buscarPorId(id);
+
+        if (produto.getQuantidade() < quantitySaida) {
+            throw new IllegalStateException("Saldo insuficiente. Estoque atual de " + produto.getNome() + ": " + produto.getQuantidade());
+        }
+
+        produto.setQuantidade(produto.getQuantidade() - quantidadeSaida);
+        return produtoRepository.save(produto);
+    }
+} 
