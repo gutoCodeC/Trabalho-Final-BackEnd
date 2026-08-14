@@ -1,13 +1,14 @@
-// ==========================================
-// 1. FUNÇÃO DE LOGIN
-// ==========================================
+// Simulação de Login/Registro usando LocalStorage:
+
+
+// Função responsável pelo login:
 function fazerLogin(event) {
   event.preventDefault(); // Evita que a página recarregue
 
   const email = document.getElementById("login-email").value;
   const senha = document.getElementById("login-senha").value;
 
-  // Puxa a lista de usuários salvos no navegador (ou cria uma lista vazia se não tiver ninguém)
+  // Puxa a lista de usuários salvos no navegador ou cria uma lista vazia se não tiver ninguém)
   const usuariosSalvos =
     JSON.parse(localStorage.getItem("bancoUsuarios")) || [];
 
@@ -18,7 +19,7 @@ function fazerLogin(event) {
   if (usuarioEncontrado && usuarioEncontrado.senha === senha) {
     alert(`Bem-vindo(a), ${usuarioEncontrado.nome}!`);
     // Redireciona para a próxima página
-    window.location.href = ".html";
+    window.location.href = ".html";                            // Tem que colocar o nome da página que vamos mexer
   } else {
     alert("Acesso negado: E-mail ou senha incorretos!");
   }
@@ -66,3 +67,22 @@ document.addEventListener("DOMContentLoaded", () => {
     formRegistro.addEventListener("submit", fazerRegistro);
   }
 });
+
+
+
+// O HTML da página de Login/Registro tem que conversar mais ou menos assim para rodar com o código:
+
+//     <form id="form-login">
+//         <h2>Entrar</h2>
+//         <input type="email" id="login-email" placeholder="Digite seu e-mail" required>
+//         <input type="password" id="login-senha" placeholder="Digite sua senha" required>
+//         <button type="submit" class="btn-login">Entrar</button>
+//     </form>
+
+//     <form id="form-registro">
+//         <h2>Criar Conta</h2>
+//         <input type="text" id="reg-nome" placeholder="Seu nome" required>
+//         <input type="email" id="reg-email" placeholder="Seu e-mail" required>
+//         <input type="password" id="reg-senha" placeholder="Crie uma senha" required>
+//         <button type="submit">Cadastrar</button>
+//     </form>
