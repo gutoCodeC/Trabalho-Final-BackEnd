@@ -1,4 +1,4 @@
-package Ana.Clara.ProjetoAPI;
+package projetoAPI;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

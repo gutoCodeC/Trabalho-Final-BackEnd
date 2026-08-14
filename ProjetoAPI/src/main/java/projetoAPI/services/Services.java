@@ -1,11 +1,11 @@
-package Ana.Clara.ProjetoAPI.services;
+package projetoAPI.services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import Ana.Clara.ProjetoAPI.entities.Usuario;
-import Ana.Clara.ProjetoAPI.repositories.Repositories;
+import projetoAPI.entities.Usuario;
+import projetoAPI.repositories.Repositories;
 
 @Service
 public class Services {

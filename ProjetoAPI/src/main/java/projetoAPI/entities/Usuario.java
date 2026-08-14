@@ -1,4 +1,4 @@
-package Ana.Clara.ProjetoAPI.entities;
+package projetoAPI.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
