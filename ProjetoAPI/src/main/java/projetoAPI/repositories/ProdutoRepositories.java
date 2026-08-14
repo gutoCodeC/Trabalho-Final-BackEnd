@@ -9,15 +9,15 @@ import projetoAPI.entities.Produto;
 
 public interface ProdutoRepositories extends JpaRepository<Produto, Long> {
 
-	// Busca um produto pelo nome exato
+	// busca pelo nome exato
 	Optional<Produto> findByNome(String nome);
 
-	// Busca produtos cujo nome contenha o texto informado (ignorando maiusculas/minusculas)
+	// busca por parte do nome
 	List<Produto> findByNomeContainingIgnoreCase(String nome);
 
-	//  produtos por categoria (caso a Entity tenha esse campo)
+	// filtra por categoria
 	List<Produto> findByCategoria(String categoria);
 
-	//  produtos com quantidade em estoque abaixo do valor informado
+	// produtos com estoque baixo
 	List<Produto> findByQuantidadeLessThan(Integer quantidade);
 }
