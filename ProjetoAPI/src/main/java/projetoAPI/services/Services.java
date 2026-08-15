@@ -1,8 +1,13 @@
 package projetoAPI.services;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
+import projetoAPI.entities.Produto;
+import projetoAPI.repositories.ProdutoRepository;
+
+@Service
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
@@ -54,7 +59,7 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    public Produto adicionarEstoque(Long id, Double quantidadeEntrada) {
+    public Produto adicionarEstoque(Long id, Integer quantidadeEntrada) {
         if (quantidadeEntrada == null || quantidadeEntrada <= 0) {
             throw new IllegalArgumentException("A quantidade de entrada deve ser maior que zero.");
         }
@@ -65,14 +70,14 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-    public Produto removerEstoque(Long id, Double quantidadeSaida) {
+    public Produto removerEstoque(Long id, Integer quantidadeSaida) {
         if (quantidadeSaida == null || quantidadeSaida <= 0) {
             throw new IllegalArgumentException("A quantidade de saída deve ser maior que zero.");
         }
 
         Produto produto = buscarPorId(id);
 
-        if (produto.getQuantidade() < quantitySaida) {
+        if (produto.getQuantidade() < quantidadeSaida) {
             throw new IllegalStateException("Saldo insuficiente. Estoque atual de " + produto.getNome() + ": " + produto.getQuantidade());
         }
 
