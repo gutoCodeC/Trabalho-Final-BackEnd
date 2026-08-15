@@ -1,3 +1,5 @@
+// JS responsável por gerenciar  a autenticação de usuários (login e registro):
+
 // Espaço para a URL da API do Spring:
 const apiURL = "http://localhost:8080/usuario";
 
