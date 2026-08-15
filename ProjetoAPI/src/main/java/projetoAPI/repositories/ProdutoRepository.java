@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import projetoAPI.entities.Produto;
 
-public interface ProdutoRepositories extends JpaRepository<Produto, Long> {
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	// busca pelo nome exato
 	Optional<Produto> findByNome(String nome);
