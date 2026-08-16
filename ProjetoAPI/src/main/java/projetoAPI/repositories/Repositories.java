@@ -11,5 +11,5 @@ import projetoAPI.entities.Usuario;
 		Optional<Usuario> findByEmail(String email);
 		
 		@Transactional
-		long deleteByEmail(String email);
+		String deleteByEmail(String email);
 	}
