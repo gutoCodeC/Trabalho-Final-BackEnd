@@ -1,11 +1,11 @@
-package soloAPI.services;
+package projetoAPI.services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import soloAPI.entities.Usuario;
-import soloAPI.repositories.Repositories;
+import projetoAPI.entities.Usuario;
+import projetoAPI.repositories.Repositories;
 
 @Service
 public class Services {
