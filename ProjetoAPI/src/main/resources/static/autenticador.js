@@ -1,16 +1,15 @@
-// JS responsável por gerenciar  a autenticação de usuários (login e registro):
+// JS responsável por gerenciar a autenticação de usuários (login e registro)
 
-// Espaço para a URL da API do Spring:
 const apiURL = "http://localhost:8080/usuario";
 
-// Registro:
+// Registro de usuário:
 async function cadastrarUsuario(event) {
-  event.preventDefault(); // Impede o recarregamento automático da página
+  if (event) event.preventDefault(); // Impede o recarregamento da página
 
   const usuario = {
-    nome: document.getElementById("reg-nome").value,
-    email: document.getElementById("reg-email").value,
-    senha: document.getElementById("reg-senha").value,
+    nome: document.getElementById("reg-nome")?.value,
+    email: document.getElementById("reg-email")?.value,
+    senha: document.getElementById("reg-senha")?.value,
   };
 
   try {
@@ -22,27 +21,32 @@ async function cadastrarUsuario(event) {
 
     if (resposta.ok) {
       alert("Usuário cadastrado com sucesso!");
-      document.getElementById("form-registro").reset(); // Limpa os campos
+      document.getElementById("form-registro")?.reset();
     } else {
       alert("Erro ao cadastrar. Verifique os dados e tente novamente.");
     }
   } catch (erro) {
     console.error("Erro de conexão:", erro);
-    alert(
-      "Não foi possível conectar ao servidor. O Spring Boot está rodando na porta 8080?",
-    );
+    alert("Não foi possível conectar ao servidor. O Spring Boot está rodando na porta 8080?");
   }
 }
 
-// Login:
+// Login de usuário:
 async function realizarLogin(event) {
-  event.preventDefault();
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
 
-  const email = document.getElementById("login-email").value;
-  const senhaDigitada = document.getElementById("login-senha").value;
+  const emailInput = document.getElementById("login-email");
+  const senhaInput = document.getElementById("login-senha");
+
+  if (!emailInput || !senhaInput) return;
+
+  const email = emailInput.value.trim();
+  const senhaDigitada = senhaInput.value;
 
   try {
-    // Busca as informações do usuário no Spring Boot pelo e-mail
     const resposta = await fetch(`${apiURL}/email/${email}`);
 
     if (!resposta.ok) {
@@ -52,11 +56,14 @@ async function realizarLogin(event) {
 
     const usuario = await resposta.json();
 
-    // Valida se a senha enviada do banco bate com a digitada na tela
     if (usuario.senha === senhaDigitada) {
       alert(`Bem-vindo(a), ${usuario.nome}!`);
-      // Redireciona para a página interna
-      window.location.href = ".html";                                         // Espaço para o HTML da página principal.
+
+      // Salva os dados para exibir no painel principal
+      localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+
+      // REDIRECIONAMENTO PARA A PÁGINA PRINCIPAL REAL:
+      window.location.href = "./pagPrincipal.html";
     } else {
       alert("Senha incorreta!");
     }
@@ -65,34 +72,11 @@ async function realizarLogin(event) {
     alert("Erro ao conectar com o servidor.");
   }
 }
-
-// Eventos para o formulário:
+// Associa os eventos de envio aos formulários
 document.addEventListener("DOMContentLoaded", () => {
   const formRegistro = document.getElementById("form-registro");
   if (formRegistro) formRegistro.addEventListener("submit", cadastrarUsuario);
 
-  const formLogin = document.getElementById("form-login");
+  const formLogin = document.getElementById("loginForm");
   if (formLogin) formLogin.addEventListener("submit", realizarLogin);
 });
-
-
-
-// Possível modelo de <Form>:
-
-/* <form id="form-login">
-        <h2>Entrar</h2>
-        <input type="email" id="login-email" placeholder="E-mail" required>
-        <input type="password" id="login-senha" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-    </form>
-
-    <hr>
-
-
-    <form id="form-registro">
-        <h2>Criar Conta</h2>
-        <input type="text" id="reg-nome" placeholder="Nome completo" required>
-        <input type="email" id="reg-email" placeholder="E-mail" required>
-        <input type="password" id="reg-senha" placeholder="Crie uma senha" required>
-        <button type="submit">Cadastrar</button>
-    </form> */
