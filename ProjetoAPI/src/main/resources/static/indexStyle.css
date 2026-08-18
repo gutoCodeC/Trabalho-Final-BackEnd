@@ -15,20 +15,44 @@ h1 {
 
 h2 {
     font-size: 30px;
-    font-family:'Times New Roman', Times, serif;
 }
-
 
 Form {
     background-color: rgb(233, 233, 233);
- 
     text-align: center;
-    border-radius: 25px;
+    border-radius: 85px;
     border: 5px solid black;
-    margin:1%;
-    margin-left: 27%;
-    margin-right: 27%;
-    height: 460px;
+    margin:5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.container {
+    background-color: rgb(240, 240, 240);
+    border-radius: 85px;
+    border: 5px solid black;
+    text-align: center;
+    margin: 5%;
+    height: 420px;
+    a {
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        color: rgb(99, 62, 201);
+        font-size: 30px;
+    }
+}
+
+.painel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    gap: 1%;
+}
+
+.lado {
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
 }
 
 input {
@@ -37,16 +61,30 @@ input {
     margin-right: 5%;
     height: 50px;
     width: 60%;
+    font-size: 25px;
 }
 
-.container {
-  justify-content: center;
-  align-items: center;
+label {
+    font-size: 30px;
+}
+
+button {
+    width: 20%;
+    height: 50px;
+    background-color: rgb(137, 240, 77);
+    font-family: 'Times New Roman', Times, serif;
+    margin: 2%;
+    font-size: 25px;
+}
+
+a {
+    font-size: 25px;
+    color: rgb(219, 247, 167);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 body {
     background-color: rgb(170, 227, 171);
     margin: 0;
     align-items: center;
-    min-height: 100vh;
 }
