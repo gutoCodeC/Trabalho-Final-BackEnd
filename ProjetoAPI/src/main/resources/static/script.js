@@ -1,3 +1,5 @@
+// Script responsável por gerenciar o CRUD de usuários:
+
 document.addEventListener("DOMContentLoaded", () => {});
 
 console.log("JavaScript carregado!");
