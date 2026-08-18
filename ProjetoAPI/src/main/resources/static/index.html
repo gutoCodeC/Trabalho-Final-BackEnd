@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html lang = "Pt-Br">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Página de Login</title>
-        <link rel="stylesheet" href="./indexStyle.css">
-    </head>
-    <body>
-    <header>
+<html lang="Pt-Br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="./indexStyle.css">
+</head>
+<body>
+<header>
+    <br>
+    <h1>Sistema de Gerenciamento de Estoque</h1>
+    <br>
+</header>
+<div id="container">
+    <form id="loginForm">
         <br>
-        <h1>Sistema de Gerenciamento de Estoque</h1>
+        <h2>Entrar com suas credenciais</h2>
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" required placeholder="Digite seu email">
         <br>
-    </header>
-        <div id = "container">
-        <form id = "loginForm">
-            <br>
-            <h2>Entrar com suas credenciais</h2>
-            <label for = "LoginEmail">Email:</label>
-            <input type = "email" id = "login-email" required placeholder = "Digite seu email">
-            <br>
-            <br>
-            <label for = "LoginPassword">Senha:</label>
-            <input type = "password" id = "login-senha" required placeholder = "Digite sua senha">
-            <br>
-            <button onclick = "realizarLogin()">Entrar</button>
-            <br>
-        </form>
-        </div>
-    <footer>
         <br>
-        <h1>Página de consumo API</h1>
-        <p><a href = "https://github.com/Ana-Clara-Pinho/Trabalho-Final-BackEnd.git">Link do Repositório</a></p>
+        <label for="login-senha">Senha:</label>
+        <input type="password" id="login-senha" required placeholder="Digite sua senha">
         <br>
-    </footer>
-    <script src="./autenticador.js"></script>
-    </body>
+        <button type="submit">Entrar</button>
+        <br>
+    </form>
+</div>
+<footer>
+    <br>
+    <h1>Página de consumo API</h1>
+    <p><a href="https://github.com/Ana-Clara-Pinho/Trabalho-Final-BackEnd.git" target="_blank">Link do Repositório</a></p>
+    <br>
+</footer>
+<script src="./autenticador.js"></script>
+</body>
 </html>
