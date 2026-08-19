@@ -41,7 +41,17 @@ password=123
 
 ## Principais Endpoints
 
-*(preencher com os endpoints principais da API)*
+*|Método|Rota                     |Descrição                 |
+|------|-------------------------|--------------------------|
+|GET   |`/usuarios`              |Lista todos os usuários   |
+|GET   |`/usuarios/{id}`         |Busca usuário por ID      |
+|GET   |`/usuarios/email/{email}`|Busca usuário por e-mail  |
+|POST  |`/usuarios`              |Cadastra novo usuário     |
+|PUT   |`/usuarios/{id}`         |Edita um usuário existente|
+|DELETE|`/usuarios/{id}`         |Exclui um usuário         |
+|GET   |`/produtos`              |*(confirmar rota exata)*  |
+|GET   |`/produtos/{id}`         |*(confirmar)*             |
+|POST  |`/produtos`              |*(confirmar)*             |*
 
 ## Exemplos de Requisições
 
